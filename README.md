@@ -23,7 +23,11 @@ The Insurance Management Platform is a Spring Boot application built with Java t
             
       2.    GET /api/authenticate: Fetch JWT tokens from  Role_User and Role_Admin. 
             -     Fetch JWT tokens from Role_User.
+            ![Screenshot (62)](https://user-images.githubusercontent.com/54321306/231544934-86e47b67-00db-4248-86e4-79100bb35686.png)
+
             -     Fetch JWT tokens from Role_Admin.
+            ![Screenshot (63)](https://user-images.githubusercontent.com/54321306/231545576-ba8412cb-1175-4869-8806-e9856e8c2153.png)
+
 -   ## Clients:
       1.    GET /api/clients: The API endpoint to fetch all clients can only be accessed by users with the 'Role_Admin' token.
             -     Fetch all clients by Role_Admin token:
