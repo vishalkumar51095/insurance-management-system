@@ -13,13 +13,13 @@ The Insurance Management Platform is a Spring Boot application built with Java t
       1)    POST /api/new: Create a new User.
             -     Create a new User for Role_Admin.
             
-![Screenshot (28)](https://user-images.githubusercontent.com/54321306/231414612-985a9a97-55a3-4e91-86d8-eaf0eccfa3df.png)
+            ![Screenshot (28)](https://user-images.githubusercontent.com/54321306/231414612-985a9a97-55a3-4e91-86d8-eaf0eccfa3df.png)
 
             -     Create a new User for Role_User.    
       2.    GET /api/authenticate: Fetch JWT tokens from  Role_User and Role_Admin. 
             -     Fetch JWT tokens from Role_User.
             -     Fetch JWT tokens from Role_Admin.
-- ##  Clients:
+-     ##  Clients:
       1.    GET /api/clients: Fetch all clients.
             -     Fetch all clients by Role_Admin token:
             -     Fetch all clients by Role_User token:
