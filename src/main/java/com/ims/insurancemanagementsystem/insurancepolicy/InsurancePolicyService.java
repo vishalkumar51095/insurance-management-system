@@ -7,7 +7,7 @@ import java.util.List;
 public interface InsurancePolicyService {
     List<InsurancePolicyModel> findAll();
 
-    ResponseEntity<InsurancePolicyModel> findById(Long id);
+    ResponseEntity<?> findById(Long id);
 
     ResponseEntity<?> createPolicy(InsurancePolicyDto insurancePolicyDto);
     

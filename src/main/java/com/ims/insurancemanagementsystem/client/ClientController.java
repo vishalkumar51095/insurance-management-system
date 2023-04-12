@@ -14,9 +14,6 @@ import java.util.List;
 public class ClientController {
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
     private ClientService clientService;
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -41,13 +38,13 @@ public class ClientController {
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PutMapping("/{id}")
-    public ClientModel updateClient(@PathVariable Long id, @RequestBody ClientModel updatedClient) throws ResourceNotFoundException {
+    public ResponseEntity<?> updateClient(@PathVariable Long id, @RequestBody ClientModel updatedClient) throws ResourceNotFoundException {
         return clientService.updateClient(id,updatedClient);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteClient(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<?> deleteClient(@PathVariable Long id) {
         return clientService.deleteById(id);
     }
 }

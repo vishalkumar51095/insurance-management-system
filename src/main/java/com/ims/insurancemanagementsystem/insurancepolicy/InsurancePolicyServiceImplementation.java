@@ -25,12 +25,14 @@ public class InsurancePolicyServiceImplementation implements InsurancePolicyServ
     }
 
     @Override
-    public ResponseEntity<InsurancePolicyModel> findById(Long id) {
+    public ResponseEntity<?> findById(Long id) {
+        HashMap<String,Object> map=new HashMap<>();
         Optional<InsurancePolicyModel> optionalPolicy = insurancePolicyRepository.findById(id);
         if (optionalPolicy.isPresent()) {
             return ResponseEntity.ok(optionalPolicy.get());
         } else {
-            return ResponseEntity.notFound().build();
+            map.put("message","Insurance Policy is not found");
+            return ResponseEntity.status(404).body(map);
         }
     }
 

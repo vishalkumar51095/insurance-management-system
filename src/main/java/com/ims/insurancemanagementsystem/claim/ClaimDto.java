@@ -3,7 +3,6 @@ package com.ims.insurancemanagementsystem.claim;
 import java.time.LocalDate;
 
 public class ClaimDto {
-    private Long id;
     private String description;
     private LocalDate claimDate;
     private String claimStatus;

@@ -3,7 +3,6 @@ package com.ims.insurancemanagementsystem.insurancepolicy;
 import java.time.LocalDate;
 
 public class InsurancePolicyDto {
-    private Long id;
     private Long policyNumber;
     private String type;
     private double coverageAmount;

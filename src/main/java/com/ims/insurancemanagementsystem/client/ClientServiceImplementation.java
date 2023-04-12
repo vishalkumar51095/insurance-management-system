@@ -54,7 +54,7 @@ public class ClientServiceImplementation implements ClientService {
             }
         }
         catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
         }
         return ResponseEntity.ok(map);
     }
@@ -68,14 +68,14 @@ public class ClientServiceImplementation implements ClientService {
             map.put("message","saved used successfully");
         }
         catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
         }
         return ResponseEntity.ok(map);
 
     }
 
     @Override
-    public ResponseEntity<?> updateClient(Long id, ClientModel updatedClient) throws ResourceNotFoundException {
+    public ResponseEntity<?> updateClient(Long id, ClientModel updatedClient) {
         HashMap<String,Object> map=new HashMap<>();
         try {
             ClientModel client = clientRepository.findById(id)
@@ -88,7 +88,7 @@ public class ClientServiceImplementation implements ClientService {
             map.put("message", "Client update successfully");
         }
         catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
         }
         return ResponseEntity.ok(map);
     }

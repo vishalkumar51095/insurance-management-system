@@ -3,6 +3,7 @@ package com.ims.insurancemanagementsystem.config;
 import com.ims.insurancemanagementsystem.client.ClientService;
 import com.ims.insurancemanagementsystem.user.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,7 +27,7 @@ public class JwtAuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("/new")
-    public String addNewUser(@RequestBody UserInfo userInfo){
+    public ResponseEntity<?> addNewUser(@RequestBody UserInfo userInfo){
         return service.addUser(userInfo);
     }
 

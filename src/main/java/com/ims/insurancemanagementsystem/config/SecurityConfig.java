@@ -1,7 +1,5 @@
 package com.ims.insurancemanagementsystem.config;
 
-import com.ims.insurancemanagementsystem.user.UserInfo;
-import com.ims.insurancemanagementsystem.user.UserInfoRepository;
 import com.ims.insurancemanagementsystem.user.UserInfoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

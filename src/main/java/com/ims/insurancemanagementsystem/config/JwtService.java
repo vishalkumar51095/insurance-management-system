@@ -1,6 +1,5 @@
 package com.ims.insurancemanagementsystem.config;
 
-import com.ims.insurancemanagementsystem.user.UserInfo;
 import com.ims.insurancemanagementsystem.user.UserInfoRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -9,7 +8,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -23,10 +21,6 @@ public class JwtService {
 
 
     public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
-
-    @Autowired
-    private UserInfoRepository repository;
-
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
