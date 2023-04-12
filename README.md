@@ -20,16 +20,19 @@ The Insurance Management Platform is a Spring Boot application built with Java t
             -     Fetch JWT tokens from Role_User.
             -     Fetch JWT tokens from Role_Admin.
 -     ##  Clients:
-      1.    GET /api/clients: Fetch all clients.
+      1.    GET /api/clients: The API endpoint to fetch all clients can only be accessed by users with the 'Role_Admin' token.
             -     Fetch all clients by Role_Admin token:
             -     Fetch all clients by Role_User token:
-      2.    GET /api/clients/{id}: Fetch a specific client by ID.
+            
+      2.    GET /api/clients/{id}: The API endpoint to fetch all clients can be accessed by users with the 'Role_Admin' and specific 'Role_User' token.
             -     Fetch all clients by Role_Admin token:
             -     Fetch all clients by Role_User token:
-      3.    POST /api/clients: Create a new client.
+            
+      3.    POST /api/clients:The API endpoint to Create a new client can be accessed by users with the 'Role_Admin' and 'Role_User' token.
      
-      4.    PUT /api/clients/{id}: Update a client's information.
-      5.    DELETE /api/clients/{id}: Delete a client.
+      4.    PUT /api/clients/{id}:The API endpoint to Update a client's information can only be accessed by users with the specific 'Role_User' token.
+      
+      5.    DELETE /api/clients/{id}: The API endpoint to Delete a client can be accessed by users with the 'Role_Admin' and specific 'Role_User' token.
       
 - ##  Insurance Policies:
       1.    GET /api/policies: Fetch all insurance policies.
