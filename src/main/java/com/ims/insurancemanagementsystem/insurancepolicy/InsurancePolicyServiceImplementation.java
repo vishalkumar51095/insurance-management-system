@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,11 +69,15 @@ public class InsurancePolicyServiceImplementation implements InsurancePolicyServ
 
     @Override
     public ResponseEntity<?> deleteById(Long id) {
+        HashMap<String,Object> map=new HashMap<>();
         Optional<InsurancePolicyModel> optionalPolicy = insurancePolicyRepository.findById(id);
         if (optionalPolicy.isPresent()) {
             insurancePolicyRepository.deleteById(id);
-            return ResponseEntity.ok().build();
+            map.put("message","delete successfully");
         } else {
-            return ResponseEntity.notFound().build();
-        }    }
+            map.put("message","Policy id is not found");
+            return ResponseEntity.status(404).body(map);
+        }
+        return ResponseEntity.ok(map);
+    }
 }

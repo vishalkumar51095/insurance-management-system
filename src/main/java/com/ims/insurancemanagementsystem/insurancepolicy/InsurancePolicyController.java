@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/policies")
+@RequestMapping("/public/api/policies")
 public class InsurancePolicyController {
 
     private final InsurancePolicyService insurancePolicyService;

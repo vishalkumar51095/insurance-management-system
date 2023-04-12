@@ -42,7 +42,7 @@ public class ClaimServiceImplementation implements ClaimService{
             map.put("message","Data saved successfully");
         }
         catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
         }
         return ResponseEntity.ok(map);
     }
@@ -60,10 +60,10 @@ public class ClaimServiceImplementation implements ClaimService{
             claim.setClaimStatus(claimDto.getClaimStatus());
             claim.setInsurancePolicy(policy);
             claimRepository.save(claim);
-            map.put("message","Data saved successfully");
+            map.put("message","Data updated successfully");
         }
         catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
         }
         return ResponseEntity.ok(map);
     }
@@ -71,9 +71,19 @@ public class ClaimServiceImplementation implements ClaimService{
     @Override
     public ResponseEntity<?> deleteClaim(Long id) {
         HashMap<String,Object> map=new HashMap<>();
-        claimRepository.deleteById(id);
-        map.put("message","claim delete successfully");
-
+        try {
+            if (!claimRepository.existsById(id)) {
+                map.put("message","Claim not found with id " + id);
+                return ResponseEntity.status(404).body(map);
+            }
+            else {
+                claimRepository.deleteById(id);
+                map.put("message", "claim delete successfully");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         return ResponseEntity.ok(map);
     }
 }

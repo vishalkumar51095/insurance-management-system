@@ -1,5 +1,6 @@
 package com.ims.insurancemanagementsystem.claim;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ims.insurancemanagementsystem.insurancepolicy.InsurancePolicyModel;
 import jakarta.persistence.*;
 
@@ -23,6 +24,7 @@ public class ClaimModel {
     private String claimStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "insurance_policy_id")
     private InsurancePolicyModel insurancePolicy;
     public void setId(Long id) {

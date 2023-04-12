@@ -1,5 +1,6 @@
 package com.ims.insurancemanagementsystem.insurancepolicy;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ims.insurancemanagementsystem.client.ClientModel;
 import jakarta.persistence.*;
 
@@ -29,6 +30,7 @@ public class InsurancePolicyModel {
     private LocalDate endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "client_id")
     private ClientModel client;
 

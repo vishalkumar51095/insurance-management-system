@@ -2,6 +2,7 @@ package com.ims.insurancemanagementsystem.client;
 
 import com.ims.insurancemanagementsystem.Exception.ResourceNotFoundException;
 import com.ims.insurancemanagementsystem.user.UserInfo;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -12,8 +13,10 @@ public interface ClientService {
 
     ClientModel createClient(ClientModel client);
 
-    void deleteById(Long id) throws ResourceNotFoundException;
+    ResponseEntity<?> deleteById(Long id) ;
 
 
-    String addUser(UserInfo userInfo);
+    ResponseEntity<?> addUser(UserInfo userInfo);
+
+    ResponseEntity<?> updateClient(Long id, ClientModel updatedClient) throws ResourceNotFoundException;
 }

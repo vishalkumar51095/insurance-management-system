@@ -28,6 +28,9 @@ public class SecurityConfig {
     private JwtAuthFilter authFilter;
 
     @Autowired
+    private JwtAuthenticationEntryPoint entryPoint;
+
+    @Autowired
     private UserInfoUserDetailsService userDetailsService;
 
 
@@ -53,12 +56,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/new","/api/authenticate").permitAll()
+                .requestMatchers("/api/new","/api/authenticate","/public/**").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/api/**")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
