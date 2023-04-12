@@ -31,7 +31,7 @@ public class ClientController {
         return clientService.findById(id);
     }
 
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ClientModel createClient(@RequestBody ClientModel client) {
         return clientService.createClient(client);
