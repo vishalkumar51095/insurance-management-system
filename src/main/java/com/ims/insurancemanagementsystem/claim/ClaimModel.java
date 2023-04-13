@@ -17,7 +17,7 @@ public class ClaimModel {
     private Long claimNumber;
     private String description;
 
-    @Column(name="calim_date")
+    @Column(name="claim_date")
     private LocalDate claimDate;
 
     @Column(name="claim_status")

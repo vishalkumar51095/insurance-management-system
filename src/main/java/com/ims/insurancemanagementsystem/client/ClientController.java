@@ -1,5 +1,6 @@
 package com.ims.insurancemanagementsystem.client;
 
+import com.ims.insurancemanagementsystem.Exception.MissingParameterException;
 import com.ims.insurancemanagementsystem.Exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,7 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/clients")
@@ -31,9 +35,12 @@ public class ClientController {
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ClientModel createClient(@RequestBody ClientModel client) {
-        return clientService.createClient(client);
+    public ResponseEntity<?> createClient(@RequestParam(value = "userId",required = true) Long userId) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("message", "invalid user id ");
+//        map.put("userId", userId);
+//        boolean
+        return clientService.createClient(userId);//?clientService.createClient(userId):ResponseEntity.badRequest().body(map);
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER')")

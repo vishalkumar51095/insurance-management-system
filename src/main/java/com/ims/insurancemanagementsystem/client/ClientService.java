@@ -1,5 +1,6 @@
 package com.ims.insurancemanagementsystem.client;
 
+import com.ims.insurancemanagementsystem.Exception.MissingParameterException;
 import com.ims.insurancemanagementsystem.Exception.ResourceNotFoundException;
 import com.ims.insurancemanagementsystem.user.UserInfo;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ public interface ClientService {
 
     ClientModel findById(Long id) throws ResourceNotFoundException;
 
-    ClientModel createClient(ClientModel client);
+    ResponseEntity<?> createClient(Long userId) throws MissingParameterException;
 
     ResponseEntity<?> deleteById(Long id) ;
 

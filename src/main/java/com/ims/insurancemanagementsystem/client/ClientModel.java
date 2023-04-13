@@ -1,5 +1,7 @@
 package com.ims.insurancemanagementsystem.client;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.ims.insurancemanagementsystem.user.UserInfo;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -21,8 +23,19 @@ public class ClientModel {
     @Column(name="contact_information")
     private String contactInformation;
 
+    @OneToOne(optional = false, targetEntity = UserInfo.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id",insertable=true, updatable=true, nullable = false, unique = true)
+    @JsonBackReference(value = "userInfo")
+    private UserInfo userInfo;
 
 
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public void setId(Long id) {
         this.id = id;
