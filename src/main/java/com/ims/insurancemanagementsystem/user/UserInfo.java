@@ -1,21 +1,21 @@
 package com.ims.insurancemanagementsystem.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "user_info")
 public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
+
+    @Column(name = "email", updatable = true, nullable = false, length = 20, unique = true)
     private String email;
     private String password;
     private String roles;
 
-    public UserInfo(int id, String name, String email, String password, String roles) {
+    public UserInfo(Long id, String name, String email, String password, String roles) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -27,11 +27,11 @@ public class UserInfo {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

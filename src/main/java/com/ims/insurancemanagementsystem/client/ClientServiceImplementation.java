@@ -1,5 +1,6 @@
 package com.ims.insurancemanagementsystem.client;
 
+import com.ims.insurancemanagementsystem.Exception.MissingParameterException;
 import com.ims.insurancemanagementsystem.Exception.ResourceNotFoundException;
 import com.ims.insurancemanagementsystem.user.UserInfo;
 import com.ims.insurancemanagementsystem.user.UserInfoRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImplementation implements ClientService {
@@ -36,8 +38,39 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public ClientModel createClient(ClientModel client) {
-        return clientRepository.save(client);
+    public ResponseEntity<?> createClient(Long userId) throws MissingParameterException {
+        HashMap<String,Object> map=new HashMap<>();
+        try {
+            if (userId != null) {
+                UserInfo userById = repository.findById(userId);
+                ClientModel clientModel = new ClientModel();
+                if(userById!=null) {
+                    Optional<ClientModel> checkDuplicate = clientRepository.findByUserInfoId(userById.getId());
+                    if (!checkDuplicate.isPresent()) {
+                        clientModel.setName(userById.getName());
+                        clientModel.setContactInformation(userById.getEmail());
+                        clientModel.setUserInfo(userById);
+                        clientRepository.saveAndFlush(clientModel);
+                        map.put("message", "user create successfully");
+                    } else {
+                        map.put("message", "user is already exist");
+                    }
+                }
+                else {
+                    map.put("message","user is not found");
+                    return ResponseEntity.status(404).body(map);
+                }
+            } else {
+                map.put("message", "user id is null");
+            }
+        }
+        catch (MissingParameterException me){
+            ResponseEntity.badRequest().body(me);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(map);
     }
 
     @Override
@@ -63,9 +96,15 @@ public class ClientServiceImplementation implements ClientService {
     public ResponseEntity<?> addUser(UserInfo userInfo){
         HashMap<String,Object> map=new HashMap<>();
         try {
-            userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
-            repository.save(userInfo);
-            map.put("message","saved used successfully");
+            Optional<UserInfo> optionalUserInfo=repository.findByEmail(userInfo.getEmail());
+            if(!optionalUserInfo.isPresent()) {
+                userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+                repository.save(userInfo);
+                map.put("message", "saved user successfully");
+            }
+            else {
+                map.put("message","Duplicate User Found");
+            }
         }
         catch (Exception e){
             e.printStackTrace();
